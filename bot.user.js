@@ -1162,21 +1162,13 @@ var userInterface = window.userInterface = (function() {
 
         onmousedown: function(e) {
             if (window.playing) {
-                switch (e.which) {
+                if (e.which === 1) {
                     // "Left click" to manually speed up the slither
                     case 1:
                         bot.defaultAccel = 1;
                         if (!bot.isBotEnabled) {
                             original_onmouseDown(e);
                         }
-                        break;
-                        // "Right click" to toggle bot in addition to the letter "T"
-                    case 3:
-                        bot.isBotEnabled = !bot.isBotEnabled;
-                        break;
-                }
-            } else {
-                original_onmouseDown(e);
             }
             userInterface.onPrefChange();
         },
