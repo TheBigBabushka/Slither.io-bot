@@ -7,7 +7,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 // ==UserScript==
 // @name         Slither.io-bot
 // @namespace    http://slither.io/
-// @version      1.2.6
+// @version      1.2.7
 // @description  Slither.io bot
 // @author       Ermiya Eskandary & Théophile Cailliau
 // @match        http://slither.io/
@@ -1423,11 +1423,23 @@ var userInterface = window.userInterface = (function() {
     } else {
         userInterface.toggleMobileRendering(false);
     }
-    // Remove laggy logo animation
+    // Remove laggy logo animation - massive improvement in page loading speed
     if (typeof window.showlogo_iv !== 'undefined') {
         window.ncka = window.lgss = window.lga = 1;
         clearInterval(window.showlogo_iv);
         showLogo(true);
+    }
+    // Remove glow from game
+    if (window.ggbg) {
+        window.ggbg = false;
+    }
+    if (window.gbgi) {
+        window.gbgi.src = '';
+        window.gbgi.onload = null;
+        window.gbgi = null;
+        if (window.gbgmc) {
+            window.gbgmc = null;
+        }
     }
     // Unblocks all skins without the need for FB sharing.
     window.localStorage.setItem('edttsg', '1');
