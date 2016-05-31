@@ -1162,23 +1162,15 @@ var userInterface = window.userInterface = (function() {
 
         onmousedown: function(e) {
             if (window.playing) {
-                switch (e.which) {
+                if (e.which === 1) {
                     // "Left click" to manually speed up the slither
-                    case 1:
                         bot.defaultAccel = 1;
                         if (!bot.isBotEnabled) {
                             original_onmouseDown(e);
                         }
-                        break;
-                        // "Right click" to toggle bot in addition to the letter "T"
-                    case 3:
-                        bot.isBotEnabled = !bot.isBotEnabled;
-                        break;
                 }
-            } else {
-                original_onmouseDown(e);
-            }
             userInterface.onPrefChange();
+            }
         },
 
         onmouseup: function() {
@@ -1229,20 +1221,20 @@ var userInterface = window.userInterface = (function() {
             var ht = userInterface.handleTextColor;
 
             oContent.push('version: ' + GM_info.script.version);
-            oContent.push('[T / Right click] bot: ' + ht(bot.isBotEnabled));
-            oContent.push('[O] mobile rendering: ' + ht(window.mobileRender));
-            oContent.push('[A/S] radius multiplier: ' + bot.opt.radiusMult);
-            oContent.push('[D] quick radius change ' +
+            oContent.push('[      T      ] Bot: ' + ht(bot.isBotEnabled));
+            oContent.push('[      O      ] Mobile rendering: ' + ht(window.mobileRender));
+            oContent.push('[    A / S    ] Radius multiplier: ' + bot.opt.radiusMult);
+            oContent.push('[      D      ] Quick radius change ' +
                 bot.opt.radiusApproachSize + '/' + bot.opt.radiusAvoidSize);
-            oContent.push('[I] auto respawn: ' + ht(window.autoRespawn));
-            oContent.push('[G] leaderboard overlay: ' + ht(window.leaderboard));
-            oContent.push('[Y] visual debugging: ' + ht(window.visualDebugging));
-            oContent.push('[U] log debugging: ' + ht(window.logDebugging));
-            oContent.push('[H] overlays');
-            oContent.push('[Mouse Wheel] zoom');
-            oContent.push('[Z] reset zoom');
-            oContent.push('[ESC] quick respawn');
-            oContent.push('[Q] quit to menu');
+            oContent.push('[      I      ] Auto respawn: ' + ht(window.autoRespawn));
+            oContent.push('[      G      ] Leaderboard overlay: ' + ht(window.leaderboard));
+            oContent.push('[      Y      ] Visual debugging: ' + ht(window.visualDebugging));
+            oContent.push('[      U      ] Log debugging: ' + ht(window.logDebugging));
+            oContent.push('[      H      ] Overlays');
+            oContent.push('[ Mouse Wheel ] Zoom');
+            oContent.push('[      Z      ] Reset zoom');
+            oContent.push('[     ESC     ] Quick respawn');
+            oContent.push('[      Q      ] quit to menu');
 
             userInterface.overlays.prefOverlay.innerHTML = oContent.join('<br/>');
         },
